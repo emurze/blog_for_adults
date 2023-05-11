@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ star.name }}{% endblock %}
+
+{% block head %}
+    {% load truncate_line_filter %}
+    {% load humanize %}
+    {% load static %}
+    <link href="{% static 'css/blog/detail_star.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog/share_form.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog/comment.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog/comment_form.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog/recommendations.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div class="detail_star">
+        <div class="detail_star__star">
+            <div class="detail_star__image">
+                <div class="detail_image_wrapper">
+                    <img class="detail_star__img" src="{{ star.image.url }}"
+                         ondragstart="return false" alt="no image">
+                    <div class="command_sidebar">
+                        <div class="command_sidebar__container">
+                            <a href="{% url 'blog:star_share' star.slug %}" class="share_form_link">
+                                Share this star
+                            </a>
+                            <p class="comment_form_link">
+                                Add comment
+                            </p>
+                        </div>
+                    </div>
+                    <div class="recommendations">
+                        <div class="recommendations__title">Recommended</div>
+                        <div class="recommendations__content">
+                            {% for recommendation in recommendations %}
+                                <div class="recommendation_item">
+                                    {% with recommendation_url=recommendation.get_absolute_url %}
+                                        <div class="recommendation_item__container">
+                                            <div class="recommendation_item__img">
+                                                <a href="{{ recommendation_url }}">
+                                                    <img src="{{ recommendation.image.url }}"
+                                                         ondragstart="return false"alt="no image">
+                                                </a>
+                                            </div>
+                                            <div class="right_card_part">
+                                                <div class="recommendation_item__name">
+                                                    <a href="{{ recommendation_url }}">
+                                                        {{ recommendation.name }}
+                                                    </a>
+                                                </div>
+                                                <div class="recommendation_item__content">
+                                                    <a href="{{ recommendation_url }}">
+                                                        {{ recommendation.content | truncatechars:"20" }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="detail_star__name">{{ star.name }}</p>
+            <p class="detail_star__content">{{ star.content }}</p>
+            <div class="add_info">
+                Created <p class="detail_star__publish">{{ star.publish  }}</p>
+                By <p class="detail_star__author">{{ star.author.username }}</p>
+            </div>
+        </div>
+        <br />
+        <div class="comments">
+            <div class="comments__container">
+                <p class="comments__title">Comments</p>
+                <div class="button_add_comment" id="id_comment_form">
+                    <span class="button_add_comment__content">Add comment</span>
+                </div>
+            </div>
+
+            <div class="blank"></div>
+
+            {% include 'blog/include/comment_form.html' %}
+
+             <div class="comment_items">
+                {% for comment in comments %}
+                    <div class="comment_item">
+                        <img class="user_icon" src="{% static 'images/blog/user_icon.png' %}" />
+                        <div class="comment_item__info">
+                            <span class="comment_item__username">{{ comment.comment_user.name }}</span>
+                            <span class="comment_item__publish">
+                                {{ comment.created | naturaltime }}
+                            </span>
+                            {% with comment_content=comment.content %}
+                                <div class="comment_item__content">
+                                    {{ comment_content | truncate_line }}
+                                </div>
+                                <div class="comment_item__full_content no_display">
+                                    {{ comment.content | truncate_line:'"100","63","None","comment_messages"' }}
+                                    <p class="comment_message_less">Show less</p>
+                                </div>
+                            {% endwith %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% if not comments.exists %}
+        <script type="text/javascript" src="{% static 'js/blog/add_inner_html_to_blank.js' %}"></script>
+    {% endif %}
+
+    <script src="{% static 'js/blog/comment_form_drag.js' %}" type="text/javascript"></script>
+
+    {% if open_comment_form %}
+        <script type="text/javascript">comment_form.classList.remove("no_display")</script>
+    {% endif %}
+
+    <script src="{% static 'js/blog/comment_read_more.js' %}" type="text/javascript"></script>
+{% endblock %}

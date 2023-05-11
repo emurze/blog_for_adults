@@ -1,0 +1,66 @@
+.share_form {
+    display: inline-block;
+    border: 2px ridge #151313;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #131212;
+    width: 350px;
+
+    .share_from__field {
+        color: #e0dfdf;
+
+        input, textarea {
+            display: inline-block;
+            border: 0.25px solid #212121;
+            //color: #ece9e9;
+            //background-color: #212121;
+            background-color: #e3e7f6;
+            color: black;
+            padding: 4px 6px;
+            border-radius: 4px;
+            resize: none;
+        }
+    }
+
+    button {
+        display: block;
+        color: #a2a1a1;
+        background-color: #2f2f2f;
+        padding: 6px 10px;
+        width: 320px;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 10px;
+        font-size: 1.1em;
+    }
+}
+
+.detail_star {
+    &__image {
+        display: inline-block;
+        position: relative;
+    }
+}
+
+.share_form_link {
+    display: inline-block;
+    max-height: 40px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: black;
+    cursor: pointer;
+    color: #ff9000;
+
+    &:hover, &:active {
+        background-color: #181818;
+        color: #ff9000;
+    }
+     &:visited {color: #ff9000;}
+}
+
+.share_headline {
+    font-size: 2em;
+    color: #e0dfdf;
+    margin-bottom: 25px;
+    width: 350px;
+    text-align: center;
+}

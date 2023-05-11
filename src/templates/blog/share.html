@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Share {{ star.name }}{% endblock %}
+
+{% block head %}
+{% load static %}
+    <link href="{% static 'css/blog/share_form.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="share_form">
+        <form action="{% url 'blog:star_share' star.slug %}" method="POST">
+            <div class="share_headline">Share {{ star.name }}</div>
+            {% for field in form %}
+                <div class="share_from__field">
+                    {{ field.errors }}
+                    {{ field }}
+                </div>
+                <br />
+            {% endfor %}
+            <button type="submit" value="submit">send</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

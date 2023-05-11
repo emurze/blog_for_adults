@@ -1,0 +1,31 @@
+<div class="comment_form no_display">
+    <form method="POST">
+        <div class="field_set">
+            <div class="comment_user_form__field_set">
+                <div class="comment_form__field">
+                    {{ comment_user_form.name.errors }}
+                    <label for="{{ comment_user_form.name.id_for_label }}" style="display: none">
+                        {{ comment_user_form.name.label }}:
+                    </label>
+                    {{ comment_user_form.name }}
+                </div>
+                 <div class="comment_form__field">
+                    {{ comment_user_form.email.errors }}
+                    <label for="{{ comment_user_form.email.id_for_label }}" style="display: none">
+                        {{ comment_user_form.email.label }}:
+                    </label>
+                    {{ comment_user_form.email }}
+                </div>
+            </div>
+            <div class="comment_form__field">
+                {{ comment_form.content.errors }}
+                <label for="{{ comment_form.content.id_for_label }}" style="display: none">
+                    {{ comment_form.content.label }}
+                </label>
+                {{ comment_form.content }}
+            </div>
+        </div>
+        <button type="submit" value="submit">Add</button>
+        {% csrf_token %}
+    </form>
+</div>

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {% load static %}
+    <link href="{% static 'css/blog/stars.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog/tags.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block share_success %}
+    <!---->
+    {% if star_name and email_to %}
+        <div id="share_success">
+            {{ star_name }} was successfully sent to: {{ email_to }}
+            <span class="cross noselect">&#215;</span>
+        </div>
+    {% endif %}
+    <!---->
+{% endblock %}
+
+{% block content %}
+<div class="stars_container">
+    <div class="stars">
+        {% for star in pornostars %}
+            <div class="star">
+                <div class="star__item">
+                    {% if star.image %}
+                        <img onclick='location.href="{{ star.get_absolute_url }}"'
+                             class="micro_star_img" src="{{ star.image.url }}" alt="no image" />
+                    {% endif %}
+                    <div class="star__content__container">
+                        <h2 onclick='location.href="{{ star.get_absolute_url }}"'
+                            class="star__name">{{ star.name }}</h2>
+                        <p onclick='location.href="{{ star.get_absolute_url }}"'
+                           class="star__content">{{ star.content | truncatechars:80 }}</p>
+                        <div class="tags">
+                            {% for tag in star.tags.all %}
+                                <div class="tag_item">
+                                    <a href="{% url 'star:star_list_by_tag' tag.slug %}">
+                                        {{ tag.name }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="stars__empty_message">No stars yet</p>
+        {% endfor %}
+    </div>
+    {% include 'include/pagination.html' with page=pornostars %}
+</div>
+{% endblock %}
+
+{% block script %}
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/blog/base.js' %}"></script>
+{% endblock %}

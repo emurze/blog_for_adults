@@ -1,0 +1,57 @@
+.stars_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #c6c6c6;
+}
+.stars_container .pagination {
+  margin-bottom: 10px;
+}
+.stars_container .stars {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.stars_container .stars .star__name {
+  margin-bottom: 5px;
+}
+.stars_container .stars .star__item {
+  display: flex;
+  margin-bottom: 15px;
+  width: 800px;
+}
+.stars_container .stars .star__item .micro_star_img {
+  display: inline-block;
+  height: 200px;
+  max-width: 360px;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+  border-radius: 4px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.stars_container .stars .star__item .star__content__container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+.stars_container .stars .star__item .star__content__container .star__name {
+  cursor: pointer;
+}
+.stars_container .stars .star__item .star__content__container .star__name:hover {
+  color: white;
+}
+.stars_container .stars .star__item .star__content__container .star__content {
+  cursor: pointer;
+}
+.stars_container .stars .star__item .star__content__container .star__content:hover {
+  color: white;
+}
+.stars_container .stars .stars__empty_message {
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=stars.css.map */
