@@ -1,0 +1,10 @@
+asgiref==3.6.0
+DateTime==5.1
+Django==4.1.8
+django-debug-toolbar==4.0.0
+django-taggit==4.0.0
+Pillow==9.5.0
+python-lorem==1.3.0
+pytz==2023.3
+sqlparse==0.4.4
+zope.interface==6.0
